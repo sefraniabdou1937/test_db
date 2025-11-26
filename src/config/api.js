@@ -10,3 +10,5 @@ export const getEndpoint = (path) => {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${API_URL}${cleanPath}`;
 };
+
+
