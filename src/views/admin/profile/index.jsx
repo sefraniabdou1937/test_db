@@ -19,6 +19,9 @@ import Card from "components/card/Card.js";
 import { useAuth } from "contexts/AuthContext";
 import { MdPerson, MdEmail, MdCheckCircle, MdLock } from "react-icons/md";
 
+// --- CORRECTION 1 : Import de la configuration API ---
+import { API_URL } from "config/api"; 
+
 export default function ProfileOverview() {
   const { token } = useAuth();
   const toast = useToast();
@@ -38,7 +41,8 @@ export default function ProfileOverview() {
   useEffect(() => {
     if (token) {
       // Récupérer l'utilisateur
-      fetch("http://127.0.0.1:8000/api/users/me", {
+      // --- CORRECTION 2 : Utilisation de l'URL dynamique ---
+      fetch(`${API_URL}/api/users/me`, {
         headers: { "Authorization": `Bearer ${token}` }
       })
       .then(res => res.json())
@@ -46,7 +50,8 @@ export default function ProfileOverview() {
       .catch(err => console.error(err));
 
       // Récupérer ses stats
-      fetch("http://127.0.0.1:8000/api/tasks/stats", {
+      // --- CORRECTION 3 : Utilisation de l'URL dynamique ---
+      fetch(`${API_URL}/api/tasks/stats`, {
         headers: { "Authorization": `Bearer ${token}` }
       })
       .then(res => res.json())
@@ -80,7 +85,8 @@ export default function ProfileOverview() {
     }
 
     // Appel API
-    fetch("http://127.0.0.1:8000/api/users/me/password", {
+    // --- CORRECTION 4 : Utilisation de l'URL dynamique ---
+    fetch(`${API_URL}/api/users/me/password`, {
       method: "PUT",
       headers: { 
         "Content-Type": "application/json",
